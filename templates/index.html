@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <div style="display:block;">{{article.title}}</div>
+                <div style="display:block;">{{article.body}}</div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'home-page' %}">go to link</a>
+</body>
+</html>
