@@ -10,6 +10,15 @@ class Article(models.Model):
         verbose_name="Body of the article"
     )
     featured_image = models.ImageField()
+    category = models.ForeignKey(
+        "post.Category",
+        on_delete=models.SET_NULL,
+        null=True
+    )
+    tags = models.ManyToManyField(
+        "post.Tag",
+        related_name="articles"
+    )
 
     class Meta:
         verbose_name = "Blog article"
