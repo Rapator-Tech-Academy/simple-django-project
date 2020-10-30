@@ -13,6 +13,7 @@ class Article(models.Model):
     category = models.ForeignKey(
         "post.Category",
         on_delete=models.SET_NULL,
+        related_name="articles",
         null=True
     )
     tags = models.ManyToManyField(
