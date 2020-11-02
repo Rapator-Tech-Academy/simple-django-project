@@ -20,6 +20,10 @@ class Article(models.Model):
         "post.Tag",
         related_name="articles"
     )
+    view_count = models.PositiveIntegerField(default=0)
+    slug = models.SlugField(null=True, unique=True)
+    active_duration = models.DurationField(null=True)
+
 
     class Meta:
         verbose_name = "Blog article"
