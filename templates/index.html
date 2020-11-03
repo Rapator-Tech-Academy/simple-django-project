@@ -11,11 +11,13 @@
 <body>
     <ul>
         {% for article in articles %}
+            <a href="{% url 'article-detail' article.slug %}">
             <li>
                 <div style="display:block;">{{article.title}}</div>
-                <img src="{{article.featured_image.url}}" alt="">
+                <img src="{{ article.featured_image.url }}" alt="">
                 <div style="display:block;">{{article.body}}</div>
             </li>
+        </a>
         {% endfor %}
     </ul>
 
