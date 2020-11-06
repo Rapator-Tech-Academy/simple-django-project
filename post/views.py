@@ -4,7 +4,9 @@ from django.views.generic import (
     TemplateView,
     ListView,
     DetailView,
-    FormView
+    FormView,
+
+    CreateView
 )
 
 
@@ -39,7 +41,13 @@ class Contact(FormView):
     template_name = "contact.html"
 
     def form_valid(self, form):
+        print(form.cleaned_data)
         return HttpResponseRedirect(self.get_success_url())
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
 
 class CategoryCreateView(FormView):
@@ -49,13 +57,14 @@ class CategoryCreateView(FormView):
 
     def form_valid(self, form):
         Category.objects.create(
-            name=form.data.get('name'),
-            is_active=bool(form.data.get('is_active'))
+            name=form.cleaned_data.get('name'),
+            is_active=bool(form.cleaned_data.get('is_active'))
         )
         return HttpResponseRedirect(self.get_success_url())
 
 
-class ArticleCreateView(FormView):
+class ArticleCreateView(CreateView):
     form_class = ArticleForm
     success_url = "/"
     template_name = "article/create.html"
+    

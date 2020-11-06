@@ -9,9 +9,17 @@ class ContactForm(forms.Form):
         ("t2", ("test 2")),
         ("t3", ("test 3")),
     )
-    name = forms.CharField(label="Your name", max_length=100)
-    surname = forms.CharField(label="Your surname", max_length=100)
-    test = forms.ChoiceField(choices=choices)
+    name = forms.CharField(
+        label="Your name",
+        max_length=100
+    )
+    surname = forms.CharField(
+        label="Your surname",
+        max_length=100
+    )
+    test = forms.ChoiceField(
+        choices=choices
+    )
     date = forms.DateTimeField()
 
 
@@ -21,6 +29,7 @@ class CategoryForm(forms.Form):
 
 
 class ArticleForm(forms.ModelForm):
+    title = forms.CharField(label="Title of the article", max_length=100)
     class Meta:
         model = Article
-        fields = ['title', 'body', 'featured_image', 'category', 'tags', 'view_count']
+        fields = ['title', 'body', 'featured_image', 'category', 'tags', 'slug']
