@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+
+
 from django.views.generic import (
     TemplateView,
     ListView,
@@ -68,3 +70,4 @@ class ArticleCreateView(CreateView):
     success_url = "/"
     template_name = "article/create.html"
     
+
