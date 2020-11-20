@@ -3,6 +3,7 @@ from django.contrib.auth.models import (
     AbstractBaseUser, User,
     UserManager, PermissionsMixin
 )
+from django.db.models.deletion import CASCADE
 
 
 class UserManager(UserManager):
@@ -59,4 +60,18 @@ class UserDevice(DateModel):
         return self.device_name
 
 
-# device__device_name
+class UserLog(DateModel):
+    CASES = (
+        (1, ("Created")),
+        (2, ("Updated")),
+        (3, ("Deleted")),
+    )
+    user = models.CharField(max_length=100)
+    case = models.PositiveIntegerField(choices=CASES)
+
+    class Meta:
+        verbose_name = "User log"
+        verbose_name_plural = "User logs"
+
+    def __str__(self):
+        return f"{self.user} - {self.case}"

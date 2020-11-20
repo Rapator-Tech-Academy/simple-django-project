@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 
-from users.models import UserDevice
+from users.models import UserDevice, UserLog
 
 User = get_user_model()
 
@@ -23,3 +23,7 @@ buh => User.objects.filter(name__icontains="buh")
 """
 
 admin.site.register(UserDevice)
+
+@admin.register(UserLog)
+class UserLogAdmin(admin.ModelAdmin):
+    list_display = ['user', 'case', 'created_at']
